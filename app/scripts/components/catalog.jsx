@@ -5,8 +5,10 @@ var models = require('../models/models');
 class CatalogView extends React.Component{
   constructor(){
     super();
+
     var orderData = JSON.parse(localStorage.getItem('Order'));
     var order = new models.Order(orderData);
+
     var shirtMenu = new models.ShirtCollection();
     var menu = [
       {name: 't-shirt', price: 5, description: "A good short sleeved t-shirt", picture: 'http://www.promozionale.net/images/3100001_EX.jpg'},
@@ -14,6 +16,8 @@ class CatalogView extends React.Component{
       {name: 'tank-top', price: 5, description: "A good no sleeved t-shirt", picture: 'http://wheeliejuice.com/wp-content/uploads/2016/02/black-tank-top.jpg'}
     ];
     shirtMenu.add(menu);
+
+    this.logIn = this.logIn.bind(this);
 
     this.state = {
       shirtMenu: shirtMenu,
@@ -29,6 +33,9 @@ class CatalogView extends React.Component{
     localStorage.setItem('Order', JSON.stringify(order.toJSON()));
 
     this.setState({order});
+  }
+  logIn() {
+    console.log('clicked');
   }
   render(){
     //Shirt List
@@ -57,67 +64,62 @@ class CatalogView extends React.Component{
     //Order List
     return(
       <div>
-        <NavBar username={this.state}/>
+        <NavBar logIn= {this.LogIn} username={this.state}/>
         <div>
           {MenuItems}
         </div>
-
-
       </div>
     )
   }
 }
 
-class NavBar extends React.Component{
-  render(){
-    return(
+function NavBar(){
+  return(
+    <div>
       <div>
+        Very Good Shirts
+      </div>
+      <a href="#shirts">
         <div>
-          Very Good Shirts
+          Shirts
         </div>
-        <a href="#shirts">
-          <div>
-            Shirts
-          </div>
-        </a>
-        <a href="#cart">
-          <div>
-            Cart
-          </div>
-        </a>
-        <LogIn />
-      </div>
-    )
-  }
+      </a>
+      <a href="#cart">
+        <div>
+          Cart
+        </div>
+      </a>
+      <LogIn />
+    </div>
+  )
 }
 
-class LogIn extends React.Component{
-  render(){
-    return (
-      <div>
-        <button type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-          Launch demo modal
-        </button>
-        <div className="modal fade" tabIndex="-1" role="dialog" id="myModal">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 className="modal-title">Modal title</h4>
-              </div>
-              <div className="modal-body">
-                <p>One fine body&hellip;</p>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary">Save changes</button>
-              </div>
+function LogIn(){
+
+  return (
+    <div>
+      <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        Log In
+      </button>
+      <div className="modal fade" tabIndex="-1" role="dialog" id="myModal">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 className="modal-title">Enter User Name</h4>
+            </div>
+            <div className="modal-body">
+              <input />
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" className="btn btn-primary" onClick={(e)=>this.logIn(e)} >Submit</button>
             </div>
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 module.exports = CatalogView;
