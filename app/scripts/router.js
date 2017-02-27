@@ -8,6 +8,7 @@ var Catalog = require('./components/catalog.jsx');
 var AppRouter = Backbone.Router.extend({
   routes:{
     '':'index',
+    'shirts':'index',
     'cart':'cart'
   },
   index: function(){

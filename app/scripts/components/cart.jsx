@@ -15,7 +15,19 @@ class NavBar extends React.Component{
   render(){
     return(
       <div>
-        Nav Bar
+        <div>
+          Very Good Shirts
+        </div>
+        <a href="#shirts">
+          <div>
+            Shirts
+          </div>
+        </a>
+        <a href="#cart">
+          <div>
+            Cart
+          </div>
+        </a>
       </div>
     )
   }
