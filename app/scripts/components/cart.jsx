@@ -1,11 +1,31 @@
 var React = require('react');
 
+var models = require('../models/models');
+
 class CartView extends React.Component{
+  constructor(){
+    super();
+    var orderData = JSON.parse(localStorage.getItem('Order'));
+    var order = new models.Order(orderData);
+    this.state = {
+      order: order
+    }
+  }
   render(){
+    var orderList = this.state.order.get('items').map((item, index)=> {
+      return (
+        <li key={index}>
+          {item.get('name')}
+          {item.get('price')}
+        </li>
+      )
+    })
     return(
       <div>
         <NavBar />
-        Cart Holder
+        <ul>
+          {orderList}
+        </ul>
       </div>
     )
   }
