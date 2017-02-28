@@ -62,6 +62,7 @@ class CatalogView extends React.Component{
       )
     });
     //Order List
+    console.log(this);
     return(
       <div>
         <NavBar logIn= {this.LogIn} username={this.state}/>
@@ -73,53 +74,65 @@ class CatalogView extends React.Component{
   }
 }
 
-function NavBar(){
-  return(
-    <div>
+class NavBar extends React.Component{
+  constructor(props){
+    super(props);
+  }
+  render(){
+    console.log(this);
+    return(
       <div>
-        Very Good Shirts
+        <div>
+          Very Good Shirts
+        </div>
+        <a href="#shirts">
+          <div>
+            Shirts
+          </div>
+        </a>
+        <a href="#cart">
+          <div>
+            Cart
+          </div>
+        </a>
+        <LogIn logIn={this.LogIn}/>
       </div>
-      <a href="#shirts">
-        <div>
-          Shirts
-        </div>
-      </a>
-      <a href="#cart">
-        <div>
-          Cart
-        </div>
-      </a>
-      <LogIn />
-    </div>
-  )
+    )
+  }
+
 }
 
-function LogIn(){
-
-  return (
-    <div>
-      <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal">
-        Log In
-      </button>
-      <div className="modal fade" tabIndex="-1" role="dialog" id="myModal">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 className="modal-title">Enter User Name</h4>
-            </div>
-            <div className="modal-body">
-              <input />
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" className="btn btn-primary" onClick={(e)=>this.logIn(e)} >Submit</button>
+class LogIn extends React.Component{
+  constructor(props){
+    super(props);
+  }
+  render(){
+    console.log(this);
+    return (
+      <div>
+        <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal">
+          Log In
+        </button>
+        <div className="modal fade" tabIndex="-1" role="dialog" id="myModal">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 className="modal-title">Enter User Name</h4>
+              </div>
+              <div className="modal-body">
+                <input />
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" className="btn btn-primary" onClick={(e)=>this.props.logIn(e)} >Submit</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 module.exports = CatalogView;
