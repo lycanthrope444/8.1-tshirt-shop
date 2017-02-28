@@ -36,6 +36,7 @@ class CatalogView extends React.Component{
   }
   logIn() {
     console.log('clicked');
+    console.log(this);
   }
   render(){
     //Shirt List
@@ -65,7 +66,7 @@ class CatalogView extends React.Component{
     console.log(this);
     return(
       <div>
-        <NavBar logIn= {this.LogIn} username={this.state}/>
+        <NavBar logIn= {this.logIn} username={this.state}/>
         <div>
           {MenuItems}
         </div>
@@ -95,7 +96,7 @@ class NavBar extends React.Component{
             Cart
           </div>
         </a>
-        <LogIn logIn={this.LogIn}/>
+        <LogIn logIn={this.props.logIn}/>
       </div>
     )
   }
